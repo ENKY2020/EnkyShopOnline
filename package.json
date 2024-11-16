@@ -4,13 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "your build command here"
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",  
-    "deploy": "gh-pages -d dist"   
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "firebase": "^10.8.0",
