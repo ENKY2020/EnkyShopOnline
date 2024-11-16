@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",  // This ensures build happens before deploying
-    "deploy": "gh-pages -d dist"   // This deploys the build to GitHub Pages
+    "predeploy": "npm run build",  // Make sure this line is present
+    "deploy": "gh-pages -d dist"   // Make sure this line is present
   },
   "dependencies": {
     "firebase": "^10.8.0",
@@ -36,6 +36,6 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",
     "vite": "^5.4.2",
-    "gh-pages": "^5.0.0"  // Ensure gh-pages is added as a devDependency
+    "gh-pages": "^5.0.0"  // This line should also be in devDependencies
   }
 }
