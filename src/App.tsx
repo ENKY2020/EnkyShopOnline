@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './lib/firebase';
 import Navbar from './components/Navbar';
@@ -12,6 +13,7 @@ import AdminPanel from './components/AdminPanel';
 import AdminLogin from './components/AdminLogin';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import NotFound from './components/NotFound'; // Create this component for unmatched routes
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -19,7 +21,8 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAdmin(user?.email === 'mugendievans10@gmail.com');
+      const adminEmail = process.env.REACT_APP_ADMIN_EMAIL || 'mugendievans10@gmail.com';
+      setIsAdmin(user?.email === adminEmail);
       setIsLoading(false);
     });
 
@@ -29,36 +32,30 @@ function App() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <p className="text-blue-600 font-semibold">Loading... Please wait</p>
       </div>
     );
   }
 
-  // Handle different routes
-  const path = window.location.pathname;
-
-  if (path === '/admin') {
-    return isAdmin ? <AdminPanel /> : <AdminLogin onLogin={() => setIsAdmin(true)} />;
-  }
-
-  if (path === '/login') {
-    return <Login />;
-  }
-
-  if (path === '/signup') {
-    return <SignUp />;
-  }
-
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Marketplace />
-      <Content />
-      <Contact />
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/content" element={<Content />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={isAdmin ? <AdminPanel /> : <Navigate to="/admin-login" />} />
+          <Route path="/admin-login" element={<AdminLogin onLogin={() => setIsAdmin(true)} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
