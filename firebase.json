@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "enky2020.github.io/EnkyShopOnline/",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

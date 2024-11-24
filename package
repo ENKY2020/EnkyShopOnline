@@ -1,0 +1,4 @@
+cat package.json
+git status
+git log
+x
