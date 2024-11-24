@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAdmin(user?.email === 'enkysolutions2019@gmail.com');
+      setIsAdmin(user?.email === 'mugendievans10@gmail.com');
       setIsLoading(false);
     });
 
