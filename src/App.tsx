@@ -47,6 +47,7 @@ function App() {
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/content" element={<Content />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Protect the admin route */}
           <Route path="/admin" element={isAdmin ? <AdminPanel /> : <Navigate to="/admin-login" />} />
           <Route path="/admin-login" element={<AdminLogin onLogin={() => setIsAdmin(true)} />} />
           <Route path="/login" element={<Login />} />
