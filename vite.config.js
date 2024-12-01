@@ -1,15 +1,12 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/EnkyShopOnline/',
-  plugins: [react()],
+  base: '/EnkyShopOnline/',  // Ensure the base URL is set for GitHub Pages deployment
   build: {
+    outDir: 'dist',
     rollupOptions: {
-      input: './src/main.tsx', // Update to the correct entry point
+      input: './index.html',
     },
-    outDir: 'dist', // Ensure output directory
-    emptyOutDir: true,
   },
 });
 
