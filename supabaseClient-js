@@ -1,0 +1,15 @@
+import { createClient } from '@supabase/supabase-js';
+
+// Fetch the Supabase URL and Key from the environment variables
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+// Log to the console to verify the values
+console.log("Supabase URL:", supabaseUrl);  // This should print your Supabase URL
+console.log("Supabase Anon Key:", supabaseAnonKey);  // This should print your Supabase Anon Key
+
+// Create and export the Supabase client
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export { supabase };
+
