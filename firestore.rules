@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /products/{productId} {
+      // Allow read access to anyone
+      allow read: if true;
+
+      // Allow create access to authenticated users
+      allow create: if request.auth != null;
+
+      // Allow update only if the user is an admin (checked from users collection)
+      allow update: if request.auth != null && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+  }
+}
